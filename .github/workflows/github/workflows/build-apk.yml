@@ -1,101 +1,21 @@
 
-name: Build KR Store APK
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="100" fill="#080808"/>
+  <rect x="18" y="18" width="476" height="476" rx="88"
+        fill="none" stroke="#D4AF37" stroke-width="10"/>
 
-on:
-  workflow_dispatch:
-  push:
-    paths:
-      - 'KR_Store_Android_and_PlayStore_Package(2).zip'
-      - 'icon.svg'
-      - '.github/workflows/build-apk.yml'
+  <text x="256" y="275"
+        text-anchor="middle"
+        font-family="Arial, sans-serif"
+        font-size="190"
+        font-weight="bold"
+        fill="#D4AF37">KR</text>
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Extract Android package
-        run: |
-          unzip -q 'KR_Store_Android_and_PlayStore_Package(2).zip' -d /tmp/krstore
-          cp -R /tmp/krstore/KR_Store_App_Package/android ./android
-
-      - name: Fix Java and Kotlin compatibility
-        run: |
-          cat > android/app/build.gradle <<'EOF'
-          plugins {
-              id 'com.android.application'
-              id 'org.jetbrains.kotlin.android'
-          }
-
-          android {
-              namespace 'com.krstore.global'
-              compileSdk 35
-
-              defaultConfig {
-                  applicationId 'com.krstore.global'
-                  minSdk 23
-                  targetSdk 35
-                  versionCode 1
-                  versionName '1.0'
-              }
-
-              compileOptions {
-                  sourceCompatibility JavaVersion.VERSION_17
-                  targetCompatibility JavaVersion.VERSION_17
-              }
-
-              kotlinOptions {
-                  jvmTarget = '17'
-              }
-          }
-          EOF
-
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
-
-      - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.9'
-
-      - name: Add KR Store launcher icon
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y librsvg2-bin
-
-          for spec in "mdpi 48" "hdpi 72" "xhdpi 96" "xxhdpi 144" "xxxhdpi 192"; do
-            set -- $spec
-            mkdir -p android/app/src/main/res/mipmap-$1
-            rsvg-convert -w $2 -h $2 icon.svg -o android/app/src/main/res/mipmap-$1/ic_launcher.png
-          done
-
-          python3 - <<'PY'
-          from pathlib import Path
-          import re
-
-          p = Path("android/app/src/main/AndroidManifest.xml")
-          s = p.read_text()
-          s = re.sub(r'\s+android:icon="[^"]*"', '', s)
-          s = re.sub(r'\s+android:roundIcon="[^"]*"', '', s)
-          s = s.replace(
-              "<application",
-              '<application android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher"',
-              1
-          )
-          p.write_text(s)
-          PY
-
-      - name: Build KR Store APK
-        run: gradle -p android assembleDebug
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: KR-Store-APK
-          path: android/app/build/outputs/apk/debug/*.apk
+  <text x="256" y="355"
+        text-anchor="middle"
+        font-family="Arial, sans-serif"
+        font-size="48"
+        font-weight="bold"
+        letter-spacing="12"
+        fill="#D4AF37">STORE</text>
+</svg>
