@@ -1,0 +1,21 @@
+name: Build KR Store APK
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/build-apk.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check source folder
+        run: |
+          echo "Checking repository files"
+          ls -la
+          ls -la android || true
