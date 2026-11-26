@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Discover useful products across technology, fashion, home, beauty and lifestyle at KR Store.">
+<meta name="theme-color" content="#080808">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="icon" href="icon.svg" type="image/svg+xml"><title>KR Store | Discover. Compare. Shop.</title>
+<style>
+:root{--ink:#111827;--muted:#64748b;--line:#e5e7eb;--paper:#f8fafc;--accent:#f59e0b;--dark:#111827}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:#fff}a{color:inherit}
+.top{background:#111827;color:#e5e7eb;text-align:center;padding:9px 14px;font-size:12px}.wrap{max-width:1180px;margin:auto;padding:0 20px}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 0;border-bottom:1px solid var(--line)}
+.brand{font-weight:900;font-size:27px;letter-spacing:-.8px;text-decoration:none}.brand span{color:#d97706}
+.navlinks{display:flex;gap:18px;font-size:13px;color:#475569}.navlinks a{text-decoration:none}
+.hero{margin:24px auto 18px;background:linear-gradient(120deg,#111827,#26364d);color:#fff;border-radius:22px;padding:42px 34px;display:grid;grid-template-columns:1.4fr .8fr;gap:20px;align-items:center;overflow:hidden}
+.eyebrow{color:#fbbf24;text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:800}.hero h1{font-size:clamp(32px,5vw,54px);line-height:1.04;margin:12px 0}
+.hero p{color:#d1d5db;max-width:550px;line-height:1.65}.hero-art{font-size:100px;text-align:center;filter:drop-shadow(0 15px 25px #0006)}
+.cta{display:inline-block;background:#f59e0b;color:#111827;font-weight:800;text-decoration:none;padding:13px 19px;border-radius:10px;margin-top:8px}
+.trust{display:flex;gap:18px;flex-wrap:wrap;margin:18px 0 28px;color:#64748b;font-size:12px}
+.sectionhead{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:32px 0 15px}.sectionhead h2{margin:0;font-size:24px}.sectionhead p{margin:5px 0 0;color:var(--muted);font-size:13px}
+.shop-tools{display:flex;gap:9px;width:min(100%,470px)}.search{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:10px;font-size:14px;background:white;color:var(--ink)}
+.cats{display:flex;gap:9px;overflow:auto;padding:3px 0 12px}.cat{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 14px;font-size:12px;cursor:pointer}
+.cat.active,.cat:hover{background:#111827;color:#fff;border-color:#111827}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:17px}.card{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:white;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;position:relative}.card:hover{border-color:#fbbf24}
+.card:hover{transform:translateY(-5px);box-shadow:0 16px 34px #0f172a18}.visual{height:176px;background:radial-gradient(circle at 50% 35%,#fff 0,#f8fafc 38%,#e8edf4 100%);display:grid;place-items:center;font-size:66px;position:relative;isolation:isolate}.visual:after{content:"";position:absolute;width:116px;height:116px;border-radius:50%;background:#fff;box-shadow:0 12px 28px #0f172a12;z-index:-1}.visual:before{content:"KR PICK";position:absolute;top:12px;left:12px;font-size:9px;letter-spacing:1px;font-weight:900;color:#92400e;background:#fef3c7;border:1px solid #fde68a;border-radius:99px;padding:5px 8px}
+.info{padding:15px}.tag{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#b45309;font-weight:800}.info h3{font-size:15px;margin:7px 0}
+.info p{font-size:12px;line-height:1.5;color:var(--muted);min-height:36px;margin:0 0 12px}.price{font-size:14px;font-weight:850;margin:0 0 10px;color:#111827;background:#f8fafc;border:1px solid #eef2f7;border-radius:9px;padding:9px 10px}
+.buy{display:block;text-align:center;text-decoration:none;background:#111827;color:white;padding:12px;border-radius:10px;font-size:12px;font-weight:850;letter-spacing:.15px;transition:background .2s ease,transform .2s ease}.buy:hover{background:#b45309;transform:translateY(-1px)}.buy:hover{background:#374151}
+.note{font-size:10px;color:#94a3b8;margin-top:9px;line-height:1.45}.empty{display:none;text-align:center;padding:35px;color:var(--muted)}
+.banner{margin:38px 0;background:#fffbeb;border:1px solid #fde68a;border-radius:16px;padding:22px;display:flex;justify-content:space-between;gap:18px;align-items:center}
+.banner h2{margin:0 0 6px;font-size:20px}.banner p{margin:0;color:#78350f;font-size:13px;line-height:1.5}.banner a{font-size:12px;font-weight:800;color:#92400e;white-space:nowrap}
+.footer{margin-top:45px;background:#111827;color:#cbd5e1;padding:32px 0}.footgrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:25px}
+.footer h3,.footer h4{color:white;margin-top:0}.footer p,.footer a{font-size:12px;line-height:1.7;color:#cbd5e1}.footer a{display:block;text-decoration:none;margin:5px 0}
+.disclosure{border-top:1px solid #334155;margin-top:24px;padding-top:16px;font-size:11px;color:#94a3b8;line-height:1.6}
+.legal{background:#f8fafc;padding:25px 0}.legal details{border:1px solid var(--line);border-radius:12px;padding:13px 15px;margin:8px 0;background:white}
+.legal summary{font-weight:750;font-size:13px;cursor:pointer}.legal p{font-size:12px;color:#64748b;line-height:1.6}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.visual{height:150px}.hero{grid-template-columns:1fr;padding:30px 23px}.hero-art{display:none}.nav{align-items:flex-start;flex-direction:column}.navlinks{display:flex;flex-wrap:wrap;gap:10px 16px;padding:4px 0 8px}.navlinks a{display:inline-block;padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:#f8fafc;color:#111827;font-weight:700}.footgrid{grid-template-columns:1fr 1fr}.footgrid>div:first-child{grid-column:1/-1}.sectionhead{align-items:start;flex-direction:column}.shop-tools{width:100%}}
+@media(max-width:420px){.wrap{padding:0 14px}.grid{gap:10px}.visual{height:125px;font-size:48px}.visual:after{width:88px;height:88px}.info{padding:11px}.info h3{font-size:13px}.info p{font-size:11px}.banner{align-items:flex-start;flex-direction:column}.brand{font-size:23px}.shop-tools{flex-direction:column}}
+@keyframes christmasGlow{0%,100%{opacity:1;filter:brightness(1)}50%{opacity:.35;filter:brightness(1.8)}}
+.christmas-banner{position:relative;overflow:hidden;text-align:center;padding:17px 12px 19px;background:linear-gradient(110deg,#8b0000,#b91c1c 48%,#14532d);color:#fff;font-weight:900;font-size:clamp(22px,4vw,34px);letter-spacing:1px;text-shadow:0 2px 8px #0007;border-bottom:3px solid #d4af37}
+.christmas-banner .lights{display:flex;justify-content:center;gap:clamp(14px,4vw,34px);margin-bottom:10px}
+.christmas-banner .bulb{width:9px;height:13px;border-radius:50% 50% 45% 45%;display:block;animation:christmasGlow 1s infinite alternate;box-shadow:0 0 10px currentColor}
+.christmas-banner .bulb:nth-child(4n+1){color:#ffdf55;background:#ffdf55;animation-delay:0s}.christmas-banner .bulb:nth-child(4n+2){color:#8effa1;background:#8effa1;animation-delay:.25s}.christmas-banner .bulb:nth-child(4n+3){color:#8bd8ff;background:#8bd8ff;animation-delay:.5s}.christmas-banner .bulb:nth-child(4n){color:#ff9ad5;background:#ff9ad5;animation-delay:.75s}
+@media(prefers-reduced-motion:reduce){.christmas-banner .bulb{animation:none}}
+/* KR Collection premium brand-ad banner */
+.kr-collection-banner{position:relative;display:block;isolation:isolate;margin:18px 0 22px;min-height:178px;overflow:hidden;border-radius:17px;background:linear-gradient(110deg,#111827,#292018 58%,#8b5e20);text-decoration:none;cursor:pointer;box-shadow:0 12px 28px #0f172a20}
+.kr-collection-banner img{position:absolute;inset:0;width:100%;height:100%;min-height:178px;object-fit:cover;object-position:center;z-index:-2;transition:transform .35s ease}
+.kr-collection-banner:hover img{transform:scale(1.035)}
+.kr-ad-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(10,13,20,.91),rgba(10,13,20,.66) 48%,rgba(10,13,20,.12))}
+.kr-ad-copy{min-height:178px;padding:22px 28px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;color:#fff;gap:5px}
+.kr-ad-kicker{font-size:9px;font-weight:850;letter-spacing:.24em;color:#f8d58b}
+.kr-ad-copy strong{font-size:clamp(23px,4vw,36px);line-height:1.05;letter-spacing:.09em;color:#fff;text-shadow:0 2px 10px #0008}
+.kr-ad-tagline{font-size:13px;color:#f8fafc}
+@keyframes krShopPulse{0%,100%{opacity:1;transform:scale(1);box-shadow:0 0 0 0 rgba(245,210,138,0)}50%{opacity:.72;transform:scale(1.045);box-shadow:0 0 14px 2px rgba(245,210,138,.42)}}
+.kr-ad-cta{margin-top:7px;padding:8px 12px;border:1px solid #f5d28a;border-radius:4px;color:#ffe2a1;font-size:9px;font-weight:900;letter-spacing:.14em;animation:krShopPulse 1.5s ease-in-out infinite;transform-origin:left center}
+.kr-collection-banner:hover .kr-ad-cta{animation-duration:.8s;background:rgba(245,210,138,.13)}
+@media(prefers-reduced-motion:reduce){.kr-ad-cta{animation:none}}
+.kr-ad-cta b{font-size:13px;margin-left:7px}
+.kr-collection-banner:focus-visible{outline:3px solid #f59e0b;outline-offset:3px}
+@media(max-width:600px){.kr-collection-banner{margin:12px 0 16px!important;border-radius:12px!important;min-height:104px}.kr-collection-banner img{min-height:104px;object-position:center}.kr-ad-copy{min-height:104px;padding:10px 14px;gap:3px}.kr-ad-kicker{font-size:7px;letter-spacing:.17em}.kr-ad-copy strong{font-size:19px;letter-spacing:.07em}.kr-ad-tagline{font-size:10px}.kr-ad-cta{font-size:7px;padding:5px 8px;margin-top:3px}.kr-collection-banner+ p{font-size:12px!important}}
+
+/* LUXURY BLACK & GOLD THEME */
+:root{--ink:#f5f0e5;--muted:#b8ad98;--line:#3a3020;--paper:#0b0b0b;--accent:#d4af37;--dark:#050505}
+html{scroll-behavior:smooth}body{background:#080808;color:#f5f0e5}
+.top{background:#050505;color:#e8d59a;border-bottom:1px solid #8a6b22}
+.nav{border-color:#40351f}.brand{color:#f8f1df}.brand span{color:#d4af37}
+.navlinks{color:#d8c99f}.navlinks a{color:#d8c99f}.navlinks a:hover{color:#f5d76e}
+.hero{background:radial-gradient(circle at 85% 20%,#3a2c0d 0,#17130a 35%,#050505 78%);border:1px solid #8b6b24;box-shadow:0 18px 45px #0009}
+.eyebrow,.tag{color:#e3c15b}.hero p{color:#d5c9ae}
+.cta{background:linear-gradient(135deg,#f5df91,#b88a22);color:#090909;box-shadow:0 5px 18px #d4af3733}
+.trust{color:#c8b98f}.sectionhead h2{color:#f7edcf}.sectionhead p{color:#b8ad98}
+.search{background:#111;color:#f5f0e5;border-color:#655020}.search::placeholder{color:#9c927c}
+.cat{background:#111;color:#e8dcb9;border-color:#57451c}.cat.active,.cat:hover{background:#d4af37;color:#090909;border-color:#d4af37}
+.card{background:linear-gradient(160deg,#171717,#0b0b0b);border-color:#4a3b1b;box-shadow:0 8px 24px #0008}.card:hover{border-color:#d4af37;box-shadow:0 16px 34px #d4af3722}
+.visual{background:radial-gradient(circle at 50% 35%,#39301b 0,#19150d 42%,#090909 100%)}.visual:after{background:#28200f;box-shadow:0 12px 28px #0008}.visual:before{color:#f3d77e;background:#29200d;border-color:#8a6b22}
+.info h3{color:#f8f0dc}.info p{color:#b8ad98}.price{color:#f4df9c;background:#17130a;border-color:#55421b}
+.buy{background:linear-gradient(135deg,#f1d77e,#b88a22);color:#080808}.buy:hover{background:#ffe7a0;color:#080808}
+.note{color:#9d927b}.empty{color:#b8ad98}
+.banner{background:#151108;border-color:#80621e}.banner h2{color:#f4df9c}.banner p,.banner a{color:#d9c58c}
+.footer{background:#030303;color:#cfc3a5;border-top:1px solid #80621e}.footer h3,.footer h4{color:#f3d77e}.footer p,.footer a{color:#cfc3a5}.disclosure{border-color:#3c3019;color:#9f947b}
+.legal{background:#0a0a0a}.legal details{background:#121212;border-color:#4b3b1c}.legal summary{color:#e8d59a}.legal p{color:#b8ad98}
+.christmas-banner{background:linear-gradient(110deg,#050505,#17130a 50%,#050505);color:#f3d77e;border-bottom:2px solid #d4af37;text-shadow:0 2px 10px #d4af3744}.christmas-banner .bulb:nth-child(n){color:#e5c45c;background:#e5c45c;box-shadow:0 0 10px #d4af37}
+.kr-collection-banner{background:linear-gradient(110deg,#050505,#211a0c 58%,#70551c);border:1px solid #b38b2d;box-shadow:0 12px 28px #0009}
+.kr-ad-shade{background:linear-gradient(90deg,rgba(0,0,0,.94),rgba(10,9,5,.72) 48%,rgba(10,9,5,.2))}.kr-ad-kicker{color:#e8cf83}.kr-ad-copy strong{color:#f7e7b1}.kr-ad-tagline{color:#e4d7b5}.kr-ad-cta{border-color:#d4af37;color:#f4dc91}
+#kr-collection{background:#0b0b0b!important;border-color:#b38b2d!important}#kr-collection p{color:#b8ad98!important}
+.navlinks a{background:#111;border-color:#4a3b1b;color:#e8d59a}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+
+/* KR STORE LUXURY BLACK & GOLD THEME */
+:root{--ink:#f5f0df;--muted:#c2b89c;--line:#493d20;--paper:#0b0b0b;--accent:#d4af37;--dark:#050505}
+html{background:#080808;color-scheme:dark}body{background:#080808!important;color:#f5f0df!important}
+a{color:#e5c65a}.top,.footer{background:#050505!important;color:#e8d99b!important}
+.nav{border-color:#493d20!important}.brand span,.eyebrow,.tag{color:#e5c65a!important}
+.hero{background:linear-gradient(120deg,#050505,#242014)!important;border:1px solid #8b7028}
+.cta,.buy{background:linear-gradient(135deg,#f4d879,#b88a19)!important;color:#090909!important;border:1px solid #f4d879}
+.cat,.search,.legal details,.card{background:#111!important;color:#f5f0df!important;border-color:#493d20!important}
+.cat.active,.cat:hover{background:#d4af37!important;color:#080808!important;border-color:#f4d879!important}
+.visual{background:radial-gradient(circle at 50% 35%,#3a321c 0,#17140d 48%,#090909 100%)!important}
+.visual:after{background:#26200f!important;box-shadow:0 12px 28px #000!important}
+.visual:before{color:#f4d879!important;background:#211b0b!important;border-color:#8b7028!important}
+.info h3,.price,.sectionhead h2,.banner h2,.legal summary{color:#f5e6b0!important}
+.price{background:#090909!important;border-color:#493d20!important;color:#f4d879!important}
+.banner{background:#171207!important;border-color:#8b7028!important}.banner p{color:#d9c78f!important}.banner a{color:#f4d879!important}
+.legal{background:#090909!important}.legal p,.footer p,.footer a{color:#c2b89c!important}.disclosure{border-color:#493d20!important;color:#a99b76!important}
+.navlinks{color:#d8c990!important}.navlinks a{color:#e5d69a!important}
+.kr-collection-banner{border:1px solid #d4af37!important}
+
+</style></head>
+<body>
+<div class="christmas-banner" aria-label="Merry Christmas"><div class="lights" aria-hidden="true"><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span></div>Merry Christmas</div>
+<div class="top">A WORLD OF FINDS · PRODUCT LINKS TAKE YOU TO THE RETAILER'S WEBSITE</div>
+<header class="wrap"><nav class="nav"><a class="brand" href="#home">KR <span>Store</span></a><div class="navlinks"><a href="#shop">Shop categories</a><a href="#kr-collection">KR Collection</a><a href="#about">About</a><a href="#disclosure">Affiliate disclosure</a></div></nav></header>
+<main class="wrap" id="home">
+<section class="hero"><div><div class="eyebrow">Discover · Compare · Shop</div><h1>Find your next<br>favourite thing.</h1><p>Explore useful finds across tech, fashion, home, beauty and everyday lifestyle. Browse our collections and shop directly with participating retailers.</p><a class="cta" href="#shop">Explore products →</a></div><div class="hero-art" aria-hidden="true">🛍️</div></section>
+<a class="kr-collection-banner" href="#kr-collection" aria-label="Shop all products in KR Collection">
+<img src="https://images.openai.com/static-rsc-4/AF5ZpEMsiWgzuDd2lKPA7cudPY26Eo0MgFUs2yzRF92boV9srtLKVNJ1YmXragQFQP6rRnByZCEG1LVNLjsK1mGBfCN2TABu6te6Xh4lpSoc7tYwnMLoS7dUug6n9Cc4xUb-TlbtWIwZcddX6yCUjpCUPw0LHSE6Pr5gveylHPHgcYcUSwJkpFZ9GMMeeFRN?purpose=fullsize" alt="KR Collection — Everything You Love, All in One Place" loading="lazy">
+<span class="kr-ad-shade" aria-hidden="true"></span>
+<span class="kr-ad-copy"><span class="kr-ad-kicker">THE EXCLUSIVE EDIT</span><strong>KR COLLECTION</strong><span class="kr-ad-tagline">Everything You Love, All in One Place.</span><span class="kr-ad-cta">SHOP THE COLLECTION <b>→</b></span></span>
+</a>
+<div class="trust"><span>✓ Curated product ideas</span><span>✓ Shop with participating retailers</span><span>✓ No checkout on this website.</span></div>
+<section id="shop"><div class="sectionhead"><div><h2>Explore the store</h2><p>Choose a category, search, or sort products by Amazon price.</p></div>
+<div class="shop-tools"><input class="search" id="search" type="search" placeholder="Search products…" aria-label="Search products"><select class="search" id="sort" aria-label="Sort products"><option value="low">Price: Low to High</option><option value="high">Price: High to Low</option><option value="az">Name: A to Z</option><option value="default">Featured order</option></select></div></div>
+<div class="cats" id="cats"><button class="cat active" data-cat="All">All products</button><button class="cat" data-cat="Electronics">Electronics</button><button class="cat" data-cat="Fashion">Fashion</button><button class="cat" data-cat="Watches">Watches</button><button class="cat" data-cat="Home">Home</button><button class="cat" data-cat="Beauty">Beauty</button><button class="cat" data-cat="Lifestyle">Lifestyle</button></div>
+<p id="result-count" style="font-size:12px;color:#64748b;margin:0 0 12px">Showing all products</p><div class="grid" id="grid">
+
+<article class="card" data-cat="Electronics" data-name="mini thermal printer" data-price=""><div class="visual">🖨️</div><div class="info"><div class="tag">Smart gadgets</div><h3>Mini Thermal Printer</h3><p>A compact printer find for notes, labels and creative projects. Check the Amazon listing for exact features and compatibility.</p><div class="price">Check live price on Amazon</div><a class="buy" href="https://www.amazon.in/dp/B0F2N1QPRF?tag=krstoreglobal-21" target="_blank" rel="nofollow sponsored noopener">View on Amazon ↗</a><div class="note">Amazon product ID: B0F2N1QPRF</div></div></article>
+<article class="card" data-cat="Beauty" data-name="8 claw heated neck massager" data-price=""><div class="visual">💆</div><div class="info"><div class="tag">Personal care</div><h3>8-Claw Heated Neck Massager</h3><p>A neck and shoulder massager. Check live price on Amazon, included accessories and product specifications.</p><div class="price">Check live price on Amazon</div><a class="buy" href="https://www.amazon.in/dp/B0G1HK9DNF?tag=krstoreglobal-21" target="_blank" rel="nofollow sponsored noopener">View on Amazon ↗</a><div class="note">Amazon product ID: B0G1HK9DNF</div></div></article>
+<article class="card" data-cat="Electronics" data-name="amazon featured find b0fl7kz9ly" data-price=""><div class="visual">✨</div><div class="info"><div class="tag">Featured find</div><h3>Amazon Featured Find</h3><p>Explore this selected product on Amazon and check its current details, price and availability.</p><div class="price">Check live price on Amazon</div><a class="buy" href="https://www.amazon.in/dp/B0FL7KZ9LY?tag=krstoreglobal-21" target="_blank" rel="nofollow sponsored noopener">View on Amazon ↗</a><div class="note">Amazon product ID: B0FL7KZ9LY</div></div></article>
+<article class="card" data-cat="Electronics" data-name="amazon featured find b0gxgrb7bw" data-price=""><div class="visual">🛍️</div><div class="info"><div class="tag">New arrival</div><h3>Amazon Featured Find</h3><p>Explore this selected product on Amazon and check its current details, price and availability.</p><div class="price">Check live price on Amazon</div><a class="buy" href="https://www.amazon.in/dp/B0GXGRB7BW?tag=krstoreglobal-21" target="_blank" rel="nofollow sponsored noopener">View on Amazon ↗</a><div class="note">Amazon product ID: B0GXGRB7BW</div></div></article>
+<article class="card" data-cat="Electronics" data-name="amazon featured find b0hfmy4kmh" data-price=""><div class="visual">⭐</div><div class="info"><div class="tag">Featured find</div><h3>Amazon Featured Find</h3><p>Explore this selected product on Amazon and check its current details, price and availability.</p><div class="price">Check live price on Amazon</div><a class="buy" href="https://www.amazon.in/dp/B0HFMY4KMH?tag=krstoreglobal-21" target="_blank" rel="nofollow sponsored noopener">View on Amazon ↗</a><div class="note">Amazon product ID: B0HFMY4KMH</div></div></article>
+
+<article class="card" data-cat="Electronics" data-name="wireless earbuds" data-price=""><div class="visual">🎧</div><div class="info"><div class="tag">Electronics</div><h3>Wireless earbuds</h3><p>Everyday audio accessories for music, calls and travel.</p><div class="price">Check live price on Amazon</div><a class="buy" href="https://www.amazon.in/" target="_blank" rel="nofollow sponsored noopener">Find at Amazon ↗</a><div class="note">Add approved affiliate link and current price</div></div></article>
+<article class="card" data-cat="Electronics" data-name="phone accessories" data-price=""><div class="visual">📱</div><div class="info"><div class="tag">Electronics</div><h3>Phone accessories</h3><p>Explore chargers, cases, stands and useful add-ons.</p><div class="price">Check live price on Amazon</div><a class="buy" href="https://www.amazon.in/" target="_blank" rel="nofollow sponsored noopener">Find at Amazon ↗</a><div class="note">Add approved affiliate link and current price</div></div></article>
+<article class="card" data-cat="Electronics" data-name="work and study tech" data-price=""><div class="visual">💻</div><div class="info"><div class="tag">Electronics</div><h3>Work & study tech</h3><p>Accessories to improve your desk and daily workflow.</p><div class="price">Check live price on Amazon</div><a class="buy" href="https://www.amazon.in/" target="_blank" rel="nofollow sponsored noopener">Find at Amazon ↗</a><div class="note">Add approved affiliate link and current price</div></div></article>
+<article class="card" data-cat="Fashion" data-name="everyday sneakers" data-price=""><div class="visual">👟</div><div class="info"><div class="tag">Fashion</div><h3>Everyday sneakers</h3><p>Casual footwear ideas for everyday outfits.</p><div class="price">Check live price on Amazon</div><a class="buy" href="https://www.amazon.in/" target="_blank" rel="nofollow sponsored noopener">Find at Amazon ↗</a><div class="note">Add approved affiliate link and current price</div></div></article>
+<article class="card" data-cat="Fashion" data-name="bags and backpacks" data-price=""><div class="visual">🎒</div><div class="info"><div class="tag">Fashion</div><h3>Bags & backpacks</h3><p>Practical carry options for work, school and trips.</p><div class="price">Check live price on Amazon</div><a class="buy" href="https://www.amazon.in/" target="_blank" rel="nofollow sponsored noopener">Find at Amazon ↗</a><div class="note">Add approved affiliate link and current price</div></div></article>
+<article class="card" data-cat="Watches" data-name="classic wristwatches" data-price=""><div class="visual">⌚</div><div class="info"><div class="tag">Watches</div><h3>Classic wristwatches</h3><p>Browse simple, sporty and dress-style watch designs.</p><div class="price">Check live price on Amazon</div><a class="buy" href="https://www.amazon.in/" target="_blank" rel="nofollow sponsored noopener">Find at Amazon ↗</a><div class="note">Add approved affiliate link and current price</div></div></article>
+<article class="card" data-cat="Watches" data-name="wallets and accessories" data-price=""><div class="visual">👛</div><div class="info"><div class="tag">Watches & accessories</div><h3>Wallets & accessories</h3><p>Small everyday essentials and gift ideas.</p><div class="price">Check live price on Amazon</div><a class="buy" href="https://www.amazon.in/" target="_blank" rel="nofollow sponsored noopener">Find at Amazon ↗</a><div class="note">Add approved affiliate link and current price</div></div></article>
+<article class="card" data-cat="Home" data-name="kitchen helpers" data-price=""><div class="visual">🍳</div><div class="info"><div class="tag">Home</div><h3>Kitchen helpers</h3><p>Useful tools and accessories for everyday cooking.</p><div class="price">Check live price on Amazon</div><a class="buy" href="https://www.amazon.in/" target="_blank" rel="nofollow sponsored noopener">Find at Amazon ↗</a><div class="note">Add approved affiliate link and current price</div></div></article>
+<article class="card" data-cat="Home" data-name="home organisation" data-price=""><div class="visual">🏠</div><div class="info"><div class="tag">Home</div><h3>Home organisation</h3><p>Storage and organisation ideas for your space.</p><div class="price">Check live price on Amazon</div><a class="buy" href="https://www.amazon.in/" target="_blank" rel="nofollow sponsored noopener">Find at Amazon ↗</a><div class="note">Add approved affiliate link and current price</div></div></article>
+<article class="card" data-cat="Beauty" data-name="skincare and personal care" data-price=""><div class="visual">🧴</div><div class="info"><div class="tag">Beauty</div><h3>Skincare & personal care</h3><p>Discover everyday grooming and personal-care products.</p><div class="price">Check live price on Amazon</div><a class="buy" href="https://www.amazon.in/" target="_blank" rel="nofollow sponsored noopener">Find at Amazon ↗</a><div class="note">Add approved affiliate link and current price</div></div></article>
+<article class="card" data-cat="Beauty" data-name="beauty accessories" data-price=""><div class="visual">🪞</div><div class="info"><div class="tag">Beauty</div><h3>Beauty accessories</h3><p>Browse tools and accessories for daily routines.</p><div class="price">Check live price on Amazon</div><a class="buy" href="https://www.amazon.in/" target="_blank" rel="nofollow sponsored noopener">Find at Amazon ↗</a><div class="note">Add approved affiliate link and current price</div></div></article>
+<article class="card" data-cat="Lifestyle" data-name="travel essentials" data-price=""><div class="visual">🧳</div><div class="info"><div class="tag">Lifestyle</div><h3>Travel essentials</h3><p>Handy accessories for holidays and everyday journeys.</p><div class="price">Check live price on Amazon</div><a class="buy" href="https://www.amazon.in/" target="_blank" rel="nofollow sponsored noopener">Find at Amazon ↗</a><div class="note">Add approved affiliate link and current price</div></div></article>
+</div><div class="empty" id="empty">No matching products. Try another search or category.</div></section>
+<section id="kr-collection" aria-labelledby="kr-collection-title" style="scroll-margin-top:18px;margin:42px 0 12px;padding:26px 18px;border:2px solid #f59e0b;border-radius:18px;background:#fffbeb">
+<div class="sectionhead"><div><div class="eyebrow" style="color:#b45309">A special product collection</div><h2 id="kr-collection-title">KR Collection</h2><p>Everything You Love, All in One Place.</p></div></div>
+
+<p style="margin:0 0 14px;color:#64748b;font-size:13px">All featured Amazon affiliate products in one place.</p>
+<div class="grid" id="kr-collection-grid" style="scroll-margin-top:20px"></div>
+<div class="empty" id="kr-collection-empty" style="display:none;padding:24px 12px;border:1px dashed var(--line);border-radius:14px">New affiliate products will appear here when added to KR Store.</div>
+</section>
+<section class="banner"><div><h2>Want to discover more?</h2><p>Use our retailer links to browse current product ranges, availability and prices.</p></div><a href="https://www.amazon.in/" target="_blank" rel="nofollow sponsored noopener">Browse Amazon ↗</a></section>
+</main>
+<section class="legal" id="about"><div class="wrap"><h2>Shopping with KR Store</h2>
+<details open><summary>About us</summary><p>KR Store is an independent product-discovery website. We organise product ideas into convenient categories and direct visitors to third-party retailers to view current details and complete purchases. We do not sell, stock, ship or provide customer service for products listed through external retailers.</p></details>
+<details id="shipping"><summary>Orders, shipping & returns</summary><p>Purchases are completed on the retailer's website, not here. The retailer is responsible for checkout, payment, delivery, cancellations, warranties and returns. Always review the retailer's terms and shipping availability for your country before ordering.</p></details>
+<details id="privacy"><summary>Privacy</summary><p>This starter website does not have an account system, checkout, payment form or contact form. Retailers may collect information when you follow an external link; their privacy policies apply to those interactions. Add a privacy policy appropriate to any analytics, advertising or tracking tools you later install.</p></details>
+<details id="terms"><summary>Terms of use</summary><p>Product examples and descriptions are for discovery only. Product availability, specifications, prices and offers can change and should be confirmed with the retailer. External websites are operated independently. This starter site is not legal, tax or financial advice.</p></details>
+<details id="disclosure"><summary>Affiliate disclosure</summary><p>KR Store may participate in affiliate marketing programmes. This means we may earn a commission when you click certain links and make a qualifying purchase, at no additional cost to you. Affiliate relationships do not guarantee product quality or endorsement. We will identify affiliate links and follow each programme's disclosure and linking rules.</p></details>
+<details id="contact"><summary>Contact</summary><p>For website enquiries, add a business email address here before public promotion. Do not publish private contact details you do not want to receive public messages.</p></details>
+</div></section>
+<footer class="footer"><div class="wrap"><div class="footgrid"><div><h3>KR Store</h3><p>Discover useful finds across technology, fashion, home, beauty and lifestyle. Shop directly with participating retailers.</p></div><div><h4>Explore</h4><a href="#shop">All categories</a><a href="#about">About us</a><a href="#disclosure">Affiliate disclosure</a></div><div><h4>Information</h4><a href="#shipping">Shipping & returns</a><a href="#privacy">Privacy</a><a href="#terms">Terms</a><a href="#contact">Contact</a></div></div><div class="disclosure">Affiliate notice: We may earn from qualifying purchases through affiliate links. Retailers handle all transactions and fulfilment. © <span id="year"></span> KR Store.</div></div></footer>
+<script>
+const grid=document.getElementById('grid');
+const cards=[...grid.querySelectorAll('.card')];
+const buttons=[...document.querySelectorAll('.cat')];
+const search=document.getElementById('search');
+const sort=document.getElementById('sort');
+let active='All';
+function applyView(){
+  const q=search.value.trim().toLowerCase();
+  const mode=sort.value;
+  const sorted=[...cards].sort((a,b)=>{
+    const pa=parseFloat(a.dataset.price);
+    const pb=parseFloat(b.dataset.price);
+    const hasA=Number.isFinite(pa), hasB=Number.isFinite(pb);
+    if(mode==='low'){
+      if(hasA&&hasB)return pa-pb;
+      if(hasA)return -1;
+      if(hasB)return 1;
+    }
+    if(mode==='high'){
+      if(hasA&&hasB)return pb-pa;
+      if(hasA)return -1;
+      if(hasB)return 1;
+    }
+    if(mode==='az')return a.dataset.name.localeCompare(b.dataset.name);
+    return cards.indexOf(a)-cards.indexOf(b);
+  });
+  sorted.forEach(card=>grid.appendChild(card));
+  let shown=0;
+  cards.forEach(card=>{
+    const matches=(active==='All'||card.dataset.cat===active)&&
+      (!q||card.dataset.name.includes(q)||card.innerText.toLowerCase().includes(q));
+    card.style.display=matches?'':'none';
+    if(matches)shown++;
+  });
+  document.getElementById('empty').style.display=shown?'none':'block';
+  document.getElementById('result-count').textContent='Showing '+shown+' product'+(shown===1?'':'s');
+}
+buttons.forEach(button=>button.addEventListener('click',()=>{
+  active=button.dataset.cat;
+  buttons.forEach(item=>item.classList.toggle('active',item===button));
+  applyView();
+}));
+search.addEventListener('input',applyView);
+sort.addEventListener('change',applyView);
+// KR Collection automatically mirrors every real Amazon product listing above.
+const collectionGrid=document.getElementById('kr-collection-grid');
+const collectionEmpty=document.getElementById('kr-collection-empty');
+const affiliateCards=cards.filter(card=>{
+  const link=card.querySelector('a.buy[href]');
+  return link && /amazon\.in\/dp\//i.test(link.href);
+});
+affiliateCards.forEach(card=>{
+  const copy=card.cloneNode(true);
+  copy.style.display='';
+  collectionGrid.appendChild(copy);
+});
+collectionEmpty.style.display=affiliateCards.length?'none':'block';
+document.getElementById('year').textContent=new Date().getFullYear();
+applyView();
+</script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));}</script>
+</body></html>
