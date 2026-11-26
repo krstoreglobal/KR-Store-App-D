@@ -21,6 +21,7 @@ jobs:
           unzip -q 'KR_Store_Android_and_PlayStore_Package(2).zip' -d /tmp/krstore
           chmod -R a+rX /tmp/krstore
           cp -R /tmp/krstore/KR_Store_App_Package/android ./android
+          chmod -R u+rwX ./android
 
       - name: Fix Java and Kotlin compatibility
         run: |
