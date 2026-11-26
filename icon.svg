@@ -1,1 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#080808"/><rect x="22" y="22" width="468" height="468" rx="94" fill="none" stroke="#d4af37" stroke-width="14"/><text x="256" y="300" font-family="Georgia,serif" font-size="190" font-weight="bold" text-anchor="middle" fill="#e5c65a">KR</text><path d="M130 355H382" stroke="#d4af37" stroke-width="10" stroke-linecap="round"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff0a6"/>
+      <stop offset="45%" stop-color="#d4a437"/>
+      <stop offset="100%" stop-color="#8c5b12"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="100" fill="#080808"/>
+  <rect x="24" y="24" width="464" height="464" rx="82"
+        fill="none" stroke="url(#gold)" stroke-width="5"/>
+  <path d="M105 125 V345 M105 235 L245 125 M105 235 L250 345"
+        fill="none" stroke="url(#gold)" stroke-width="30"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M270 345 V125 H350 Q425 125 425 195 Q425 255 350 255 H270 M350 255 L430 345"
+        fill="none" stroke="url(#gold)" stroke-width="30"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="256" y="420" text-anchor="middle"
+        font-family="Arial,sans-serif" font-size="43"
+        font-weight="bold" letter-spacing="7" fill="url(#gold)">KR STORE</text>
+</svg>
